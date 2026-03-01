@@ -94,14 +94,14 @@ client.on('interactionCreate', async (interaction) => {
     const start = parseDateString(config.start);
     const end = parseDateString(config.end);
     if (!start || !end || now < start || now > end) {
-      await interaction.reply({ content: '現在受付時間外です', ephemeral: true });
+      await interaction.reply({ content: '現在受付時間外です', flags: 64 });
       return;
     }
     const command = interaction.options.getString('command');
     const ideas = loadIdeas();
     ideas[String(interaction.user.id)] = { name: interaction.user.username, command };
     saveIdeas(ideas);
-    await interaction.reply({ content: '✅提出完了', ephemeral: true });
+    await interaction.reply({ content: '✅提出完了', flags: 64 });
     return;
   }
 
@@ -113,7 +113,7 @@ client.on('interactionCreate', async (interaction) => {
     }
     config.admin_role = role.name;
     saveConfig(config);
-    await interaction.reply({ content: `✅管理ロールを ${role.name} に設定`, ephemeral: true });
+    await interaction.reply({ content: `✅管理ロールを ${role.name} に設定`, flags: 64 });
     return;
   }
 
@@ -125,7 +125,7 @@ client.on('interactionCreate', async (interaction) => {
     const channel = interaction.options.getChannel('channel');
     config.channel_id = channel.id;
     saveConfig(config);
-    await interaction.reply({ content: `✅ ${channel} に設定`, ephemeral: true });
+    await interaction.reply({ content: `✅ ${channel} に設定`, flags: 64 });
     return;
   }
 
@@ -166,9 +166,9 @@ client.on('interactionCreate', async (interaction) => {
     try {
       const channel = await client.channels.fetch(String(config.channel_id));
       await channel.send(`🏆結果発表\n\n🥇 ${first}\n🥈 ${second}\n🥉 ${third}`);
-      await interaction.reply({ content: '✅送信しました', ephemeral: true });
+      await interaction.reply({ content: '✅送信しました', flags: 64 });
     } catch (e) {
-      await interaction.reply({ content: 'チャンネル送信に失敗しました', ephemeral: true });
+      await interaction.reply({ content: 'チャンネル送信に失敗しました', flags: 64 });
     }
     return;
   }
