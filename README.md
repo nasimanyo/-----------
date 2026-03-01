@@ -33,6 +33,22 @@ npm start
 - `start` スクリプトは `tsx src/index.ts` を使います（Koyeb はこのコマンドで起動します）。
 - 必要な環境変数を設定してデプロイしてください。
 
+## Replitで動かす
+1. Replit にログインし、GitHub リポジトリをインポートまたは手動でファイルを配置。
+2. `.replit` をルートに追加して起動コマンドを指定（下記参照）。
+3. Secrets に `BOT_TOKEN` と任意で `HEALTH_CHECK_URL` を設定。
+4. 初回はターミナルで `npm install --legacy-peer-deps` を実行。
+5. Run ボタンを押すと `npm start` が実行され、`Health server listening` 等のログが出ます。
+
+`.replit` の例:
+
+```
+run = "npm start"
+```
+
+Replit は `npm start` を使うため、package.json のスクリプトをそのまま利用できます。
+Freeプランでも5分毎にHTTPリクエストが来るので、cronは不要ですが残しておいても問題ありません。
+
 ## 注意
 - トークンや機密情報は環境変数で管理してください。
 - スラッシュコマンドのグローバル登録は反映に時間がかかるため、テスト時はギルド登録に切り替えることを推奨します。
