@@ -1,0 +1,6 @@
+node_modules/
+.idea/
+.vscode/
+.DS_Store
+# token file contains secret
+token
